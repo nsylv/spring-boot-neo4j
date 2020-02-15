@@ -24,6 +24,13 @@ public class Neo4jExperimentApplication {
     SpringApplication.run(Neo4jExperimentApplication.class, args);
   }
 
+  @Bean
+  CommandLineRunner demo(PersonRepository personRepository) {
+    return args -> {
+      personRepository.findByTeammatesName("Roy").stream().forEach(person -> log.info("Found teammate: " + person.getName()));
+    };
+  }
+
 //  @Bean
 //  CommandLineRunner demo(PersonRepository personRepository) {
 //    return args -> {
