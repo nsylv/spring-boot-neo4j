@@ -3,7 +3,10 @@ package com.nsylv.neo4j.experiment;
 import java.util.Arrays;
 import java.util.List;
 
+import com.nsylv.neo4j.experiment.models.Dog;
+import com.nsylv.neo4j.experiment.models.DogBreed;
 import com.nsylv.neo4j.experiment.models.Person;
+import com.nsylv.neo4j.experiment.repositories.DogRepository;
 import com.nsylv.neo4j.experiment.repositories.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +28,29 @@ public class Neo4jExperimentApplication {
   }
 
   @Bean
-  CommandLineRunner demo(PersonRepository personRepository) {
+  CommandLineRunner dogDemo(DogRepository dogRepository) {
     return args -> {
-      personRepository.findByTeammatesName("Roy").stream().forEach(person -> log.info("Found teammate: " + person.getName()));
+      Dog Berny = new Dog("Berny",Arrays.asList(DogBreed.BORDER_COLLIE));
+      Dog Bea = new Dog("Bea", Arrays.asList(DogBreed.BORDER_COLLIE));
+      Dog Archie = new Dog("Archie", Arrays.asList(DogBreed.AUSTRALIAN_SHEPARD));
+
+      dogRepository.save(Berny);
+      dogRepository.save(Bea);
+      dogRepository.save(Archie);
+
+      List<String> names = Arrays.asList("Archie", "Bea", "Berny");
+      for (String name : names) {
+        log.info("Search [" + name + "]: " + dogRepository.findByName(name).toString());
+      }
     };
   }
+
+//  @Bean
+//  CommandLineRunner demo(PersonRepository personRepository) {
+//    return args -> {
+//      personRepository.findByTeammatesName("Roy").stream().forEach(person -> log.info("Found teammate: " + person.getName()));
+//    };
+//  }
 
 //  @Bean
 //  CommandLineRunner demo(PersonRepository personRepository) {
