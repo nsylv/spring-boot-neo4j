@@ -3,9 +3,9 @@ package com.nsylv.neo4j.experiment;
 import java.util.Arrays;
 import java.util.List;
 
-import com.nsylv.neo4j.experiment.models.Dog;
-import com.nsylv.neo4j.experiment.models.DogBreed;
-import com.nsylv.neo4j.experiment.models.Person;
+import com.nsylv.neo4j.experiment.models.*;
+import com.nsylv.neo4j.experiment.repositories.AnimalRepository;
+import com.nsylv.neo4j.experiment.repositories.CatRepository;
 import com.nsylv.neo4j.experiment.repositories.DogRepository;
 import com.nsylv.neo4j.experiment.repositories.PersonRepository;
 import org.slf4j.Logger;
@@ -27,20 +27,48 @@ public class Neo4jExperimentApplication {
     SpringApplication.run(Neo4jExperimentApplication.class, args);
   }
 
+//  @Bean
+//  CommandLineRunner dogDemo(DogRepository dogRepository) {
+//    return args -> {
+//      Dog Berny = new Dog("Berny",Arrays.asList(DogBreed.BORDER_COLLIE));
+//      Dog Bea = new Dog("Bea", Arrays.asList(DogBreed.BORDER_COLLIE));
+//      Dog Archie = new Dog("Archie", Arrays.asList(DogBreed.AUSTRALIAN_SHEPARD));
+//
+//      dogRepository.save(Berny);
+//      dogRepository.save(Bea);
+//      dogRepository.save(Archie);
+//
+//      List<String> names = Arrays.asList("Archie", "Bea", "Berny");
+//      for (String name : names) {
+//        log.info("Search [" + name + "]: " + dogRepository.findByName(name).toString());
+//      }
+//    };
+//  }
+
+//  @Bean
+//  CommandLineRunner catDemo(CatRepository catRepository) {
+//    return args -> {
+//      Cat chimi = new Cat("Chimichanga", Arrays.asList(CatBreed.AMERICAN_SHORTHAIR));
+//      Cat barney = new Cat("Barney", Arrays.asList(CatBreed.AMERICAN_SHORTHAIR));
+//      Cat princess = new Cat("Princess", Arrays.asList(CatBreed.MAINE_COON));
+//
+//      catRepository.save(chimi);
+//      catRepository.save(barney);
+//      catRepository.save(princess);
+//
+//      List<String> names = Arrays.asList("Chimichanga", "Barney", "Princess");
+//      for (String name : names) {
+//        log.info("Search [" + name + "]: " + catRepository.findByName(name).toString());
+//      }
+//    };
+//  }
+
   @Bean
-  CommandLineRunner dogDemo(DogRepository dogRepository) {
+  CommandLineRunner animalDemo(AnimalRepository animalRepository) {
     return args -> {
-      Dog Berny = new Dog("Berny",Arrays.asList(DogBreed.BORDER_COLLIE));
-      Dog Bea = new Dog("Bea", Arrays.asList(DogBreed.BORDER_COLLIE));
-      Dog Archie = new Dog("Archie", Arrays.asList(DogBreed.AUSTRALIAN_SHEPARD));
-
-      dogRepository.save(Berny);
-      dogRepository.save(Bea);
-      dogRepository.save(Archie);
-
-      List<String> names = Arrays.asList("Archie", "Bea", "Berny");
+      List<String> names = Arrays.asList("Archie", "Bea", "Berny", "Chimichanga", "Barney", "Princess");
       for (String name : names) {
-        log.info("Search [" + name + "]: " + dogRepository.findByName(name).toString());
+        log.info("Search [" + name + "]: " + animalRepository.findByName(name).toString());
       }
     };
   }
